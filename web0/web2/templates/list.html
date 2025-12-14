@@ -1,0 +1,21 @@
+{% load static %}
+
+<img src="{% static 'chicken.jpg' %}" width="200">
+
+<h3>Fried chicken</h3>
+<p>Giá: 50.000đ</p>
+
+<form action="{% url 'checkout' %}" method="get">
+    <!-- tên món -->
+    <input type="hidden" name="food" value="Fried chicken">
+
+    <!-- giá -->
+    <input type="hidden" name="price" value="50000">
+
+    <!-- số lượng -->
+    <label>Số lượng:</label>
+    <input type="number" name="quantity" id="quantity" value="1" min="1">
+
+    <br><br>
+    <button type="submit">Pay bill</button>
+</form>
