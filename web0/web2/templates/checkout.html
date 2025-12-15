@@ -18,12 +18,13 @@
 <form method="POST">
 {% csrf_token %}
 {{ form.as_p }}
+<button type="submit">
+    submit
+    </button>
 </form>
 <p>
     <b>Tổng tiền: {{ total }} đ</b>
 </p>
-<button type="submit">
-     <a href="cf.html" target=_self> Place order </a> 
-    </button>
+
 </body>
 </html>

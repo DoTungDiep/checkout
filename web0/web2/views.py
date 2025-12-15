@@ -34,10 +34,10 @@ def checkout(request):
     if request.method == "POST":
         form = CheckoutForm(request.POST)
         if form.is_valid():
-            order = form.save(commit=False)
-            order.total_price = total
-            order.save()
-            return redirect("checkout_success")
+            return redirect("confirm")
+        else:
+            print("INVALID")
+            print(form.errors)
     else:
         form = CheckoutForm()
     return render(request, 'checkout.html', {

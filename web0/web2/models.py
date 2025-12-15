@@ -1,7 +1,7 @@
 from django.db import models
 
 class Order(models.Model):
-    full_name = models.CharField(max_length=100, blank= False, null=False)
+    full_name = models.CharField(max_length=100,)
     email = models.EmailField()
     address = models.CharField(max_length=255)
     city = models.CharField(max_length=100)
