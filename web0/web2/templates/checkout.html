@@ -1,4 +1,4 @@
-"""
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,16 +15,15 @@
 <p>Số lượng: {{ quantity }}</p>
 
 <hr>
-
+<form method="POST">
+{% csrf_token %}
+{{ form.as_p }}
+</form>
 <p>
     <b>Tổng tiền: {{ total }} đ</b>
 </p>
-
 <button type="submit">
      <a href="cf.html" target=_self> Place order </a> 
     </button>
-
-</form>
 </body>
 </html>
-"""
