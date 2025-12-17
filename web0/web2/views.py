@@ -9,28 +9,14 @@ from .models import Order, OrderItem
 
 
 # Dummy cart items for demo (replace with your cart system)
-def add_to_cart(request):
-    cart = request.session.get("cart", [])
-    if request.method == "POST":
-        name = request.POST.get("name")
-        price = float(request.POST.get("price"))
-        qty = int(request.POST.get("qty"))
-        
-        cart.append({
-            "name": name,
-            "price": price,
-            "qty": qty
-        })
-        request.session["cart"] = cart
-    
-    return redirect("checkout")
-
-
 def checkout(request):
-    food = request.GET.get('food')
-    price = int(request.GET.get('price'))
-    quantity = int(request.GET.get('quantity'))
-    total = price * quantity
+    food = request.GET.get('food',)
+    price = int(request.GET.get('price',))
+    quantity = int(request.GET.get('quantity',))
+    food1 = request.GET.get('food1')
+    price1 = int(request.GET.get('price1',))
+    quantity1 = int(request.GET.get('quantity1',))
+    total = (price * quantity)+(price1 * quantity1) 
     if request.method == "POST":
         form = CheckoutForm(request.POST)
         if form.is_valid():
@@ -45,7 +31,10 @@ def checkout(request):
         'price': price,
         'quantity': quantity,
         'total': total,
-        'form': form
+        'form': form,
+        'food1':food1,
+        'price1': price1,
+        'quantity1':quantity1
     })
 def success(request):
     return render(request, "success.html")

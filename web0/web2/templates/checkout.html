@@ -1,4 +1,6 @@
-
+<style>table, th, td {
+    border: 1px solid black
+}</style>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,11 +11,23 @@
 <h3>Your Cart</h3>
 <ul>
 <h2>Hóa đơn</h2>
-
-<p>Món: {{ food }}</p>
-<p>Đơn giá: {{ price }} đ</p>
-<p>Số lượng: {{ quantity }}</p>
-
+<table style='width:100%'>
+    <tr>
+        <td>Món</td>
+        <td>Giá</td>
+        <td>Số lượng</td>
+    </tr>
+    <tr>
+        <td>{{food}}</td>
+        <td>{{price}}</td>
+        <td>{{quantity}}</td>
+    </tr>
+    <tr>
+        <td>{{food1}}</td>
+        <td>{{price1}}</td>
+        <td>{{quantity1}}</td>
+    </tr>
+</table>
 <hr>
 <form method="POST">
 {% csrf_token %}
