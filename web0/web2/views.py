@@ -1,11 +1,29 @@
 from django.shortcuts import render
-
-def ho(request):
-    return render(request, "ho.html")
-
+from django.http import HttpRequest
 from django.shortcuts import render, redirect
 from .forms import CheckoutForm
 from .models import Order, OrderItem
+from django.http import HttpResponse
+def signup(request):
+    if request.method == 'POST':
+        u_name_signup= request.POST.get('user_namesu')
+        pw_signup= request.POST.get('passwordsu')
+        #store users
+        users = request.session.get('users', {})
+        users[u_name_signup] = pw_signup
+        request.session['users'] = users
+        return redirect("login")
+    return render(request, "signup.html")
+
+def login(request):
+    if request.method == 'POST':
+        u_name = request.POST.get('user_name')
+        pw = request.POST.get('password')
+        users = request.session.get('users', {})
+        if u_name in users and users[u_name] == pw:
+            return redirect('list')
+    return render(request, "login.html")
+    
 
 
 # Dummy cart items for demo (replace with your cart system)
@@ -44,3 +62,5 @@ def confirm(request):
 
 def list(request):
     return render(request, "list.html")
+def home(request):
+    return render(request, 'home.html')
