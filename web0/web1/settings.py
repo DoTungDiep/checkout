@@ -11,22 +11,6 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
 from pathlib import Path
-from django.conf import settings
-from django.conf.urls.static import static
-from django.urls import path, include
-from pathlib import Path
-import os
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
-
-
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
-]
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')   
-#if settings.DEBUG:
-#    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -36,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-06(ghog2d8jbb5-1!er=du^s!t4fvu$23)lf)8&g5ypc4f@-b#'
+SECRET_KEY = 'django-insecure-&9@)+fe&22)n$vox6gxwrf%hxr!)+h%mntqu)__+p$=ct&hpd_'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -53,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'web2',
+    'web2'
 ]
 
 MIDDLEWARE = [
@@ -131,4 +115,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = 'static/'
+LOGIN_URL = '/login.html'
+LOGIN_REDIRECT_URL = '/home.html'

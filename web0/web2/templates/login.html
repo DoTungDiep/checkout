@@ -1,50 +1,25 @@
-<style>table, th, td {
-    border: 1px solid black
-}
-.password-box {
-    position: relative;
-    width: 250px;
-}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+</head>
+<body>
 
-.password-box input {
-    width: 100%;
-    padding-right: 35px;
-}
+<h2>Login</h2>
 
-.password-box button {
-    position: absolute;
-    right: 5px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: none;
-    border: none;
-    cursor: pointer;
-}
-</style>
-<h1>Login in to my web</h1>
-<div class="password-box">
-    <form method="post">
+<form method="post">
     {% csrf_token %}
-    <br>
 
-    User Name: <input type="text" name="user_name" placeholder="Username"></input>
-    <br>
-    Password: <input type="password" id="password" name="password" placeholder="Password"></input>
-    <label>
-        <input type="checkbox" onclick="togglePassword()">👁</label>
-</div>
-<script>
-function togglePassword() {
-    let pw = document.getElementById("password");
-    if (pw.type === "password") {
-        pw.type = "text";
-        } 
-    else {
-        pw.type = "password";
-        }
-}
-</script>
-<br>
-<button type="submit">Login</button>
+    <label>Username:</label>
+    <input type="text" name="user_name" required>
+    <br><br>
+
+    <label>Password:</label>
+    <input type="password" name="password" required>
+    <br><br>
+
+    <button type="submit">Login</button>
 </form>
-if you don't have acc, so <a href="signup.html">sign up</a>
+
+</body>
+</html>

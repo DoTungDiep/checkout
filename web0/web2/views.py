@@ -1,66 +1,52 @@
-from django.shortcuts import render
-from django.http import HttpRequest
 from django.shortcuts import render, redirect
-from .forms import CheckoutForm
-from .models import Order, OrderItem
-from django.http import HttpResponse
-def signup(request):
+from django.http import HttpRequest, HttpResponse
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
+# Create your views here.
+def register(request):
     if request.method == 'POST':
-        u_name_signup= request.POST.get('user_namesu')
-        pw_signup= request.POST.get('passwordsu')
-        #store users
-        users = request.session.get('users', {})
-        users[u_name_signup] = pw_signup
-        request.session['users'] = users
-        return redirect("login")
-    return render(request, "signup.html")
+        username = request.POST.get('username')
+        pw1 = request.POST.get('password1')
+        pw2 = request.POST.get('password2')
 
-def login(request):
+        if pw1 != pw2:
+            return render(request, 'register.html', {
+                'error': 'Passwords do not match'
+            })
+
+        if User.objects.filter(username=username).exists():
+            return render(request, 'register.html', {
+                'error': 'Username already exists'
+            })
+
+        User.objects.create_user(
+            username=username,
+            password=pw1
+        )
+        return redirect('login1')
+    return render(request, "register.html")
+
+def login1(request):
     if request.method == 'POST':
         u_name = request.POST.get('user_name')
         pw = request.POST.get('password')
-        users = request.session.get('users', {})
-        if u_name in users and users[u_name] == pw:
-            return redirect('list')
-    return render(request, "login.html")
-    
-
-
-# Dummy cart items for demo (replace with your cart system)
-def checkout(request):
-    food = request.GET.get('food',)
-    price = int(request.GET.get('price',))
-    quantity = int(request.GET.get('quantity',))
-    food1 = request.GET.get('food1')
-    price1 = int(request.GET.get('price1',))
-    quantity1 = int(request.GET.get('quantity1',))
-    total = (price * quantity)+(price1 * quantity1) 
-    if request.method == "POST":
-        form = CheckoutForm(request.POST)
-        if form.is_valid():
-            return redirect("confirm")
-        else:
-            print("INVALID")
-            print(form.errors)
-    else:
-        form = CheckoutForm()
-    return render(request, 'checkout.html', {
-        'food': food,
-        'price': price,
-        'quantity': quantity,
-        'total': total,
-        'form': form,
-        'food1':food1,
-        'price1': price1,
-        'quantity1':quantity1
-    })
-def success(request):
-    return render(request, "success.html")
-
-def confirm(request):
-    return render(request,"cf.html")
-
-def list(request):
-    return render(request, "list.html")
+        user = authenticate(request, username=u_name, password=pw)
+        if user:
+            login(request, user)
+            return redirect('home')      
+    return render(request, 'login.html')
 def home(request):
     return render(request, 'home.html')
+@login_required
+def mamnon(request):
+    return render(request, 'mamnon.html')
+
+def tieuhoc(request):
+    return render(request, 'tieuhoc.html')
+
+def thcs(request):
+    return render(request, 'thcs.html')
+
+def thpt(request):
+    return render(request, 'thpt.html')
